@@ -6,8 +6,7 @@ from pico2d import *
 
 import game_framework
 import title_state
-#import main_state2
-#import main_state3
+import main_state4
 
 name = "MainState2"
 
@@ -30,7 +29,7 @@ class Background:
         self.ob4x = 0
     def update(self):
         if Background.x == -1230:
-            pass
+            game_framework.change_state(main_state4)
         else:
             Background.x -= 1
     def draw(self):
@@ -135,7 +134,10 @@ class Boy:
             self.Lstate = False
 
     def draw(self):
-        self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
+        if self.jumpdir1 :
+            self.image.clip_draw(208, 832, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
+        else:
+            self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
 
 
 
@@ -169,6 +171,8 @@ def handle_events():
             game_framework.quit()
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.change_state(title_state)
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_a):
+            game_framework.change_state(main_state4)
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
                 boy.event('SPACE')
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):

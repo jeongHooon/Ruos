@@ -7,7 +7,7 @@ from pico2d import *
 import game_framework
 import title_state
 import main_state2
-#import main_state3
+import main_state3
 
 name = "MainState"
 
@@ -30,7 +30,7 @@ class Background:
 
     def update(self):
         if Background.x == -1230:
-            game_framework.change_state(main_state2)
+            game_framework.change_state(main_state3)
         elif self.rock == False:
             Background.x -= 1
 
@@ -83,10 +83,12 @@ class Boy:
         self.Rstate = False
         self.Lstate = False
         self.image = load_image('player2.png')
+
         self.dir = 1
 
     def update(self):
         self.frame = (self.frame + 1) % 8
+        #좌우이동
         if self.Rstate == True:
             if self.x == 240:
                 background.control('RIGHT')
@@ -95,6 +97,7 @@ class Boy:
                 self.x += 1
         elif self.Lstate == True:
             self.x -= 1
+        # 점프
         if self.jump == True:
             self.jumpdir1 += 2
             if self.djump == True:
@@ -135,7 +138,10 @@ class Boy:
             self.Lstate = False
 
     def draw(self):
-        self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
+        if self.jumpdir1 :
+            self.image.clip_draw(208, 832, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
+        else:
+            self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
 
 
 
@@ -169,7 +175,7 @@ def handle_events():
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             game_framework.change_state(title_state)
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_a):
-            game_framework.change_state(main_state2)
+            game_framework.change_state(main_state3)
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
                 boy.event('SPACE')
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
@@ -192,7 +198,7 @@ def update():
 def draw():
     clear_canvas()
     background.draw()
-    grass.draw()
+    #grass.draw()
     boy.draw()
     update_canvas()
 
