@@ -48,24 +48,24 @@ class Background:
         self.now_pos.draw(400, 400, '%d' % Background.x, (200, 0, 100))
         if Background.x < 1660:
             self.obtacle.draw(240 - self.ob1x, self.ob1y)
-            self.ob1y += 5
+            self.ob1y += 7
             if self.rock == False:
                 self.ob1x += 1
 
         if Background.x < -800:
             self.obtacle.draw(240 - self.ob2x, self.ob2y)
-            self.ob2y += 5
+            self.ob2y += 7
             if self.rock == False:
                 self.ob2x += 1
 
         if Background.x < -900:
             self.obtacle.draw(240 - self.ob3x, self.ob3y)
-            self.ob3y += 5
+            self.ob3y += 7
             if self.rock == False:
                 self.ob3x += 1
         if Background.x < -1000:
             self.obtacle.draw(240 - self.ob4x, self.ob4y)
-            self.ob4y += 5
+            self.ob4y += 7
             if self.rock == False:
                 self.ob4x += 1
         if Background.x < -520:

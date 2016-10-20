@@ -14,6 +14,7 @@ name = "MainState"
 boy = None
 grass = None
 background = None
+object = None
 font = None
 
 
@@ -22,9 +23,11 @@ class Background:
     def __init__(self):
         self.image = load_image('background1.png')
         self.obtacle = load_image('bottom.png')
+        self.obtacle1 = load_image('Obtacle5.png')
         self.ob1x = 0
         self.ob2x = 0
         self.ob3x = 0
+        self.ob4x = 0
         self.rock = False
         self.now_pos = load_font("lazy_sunday_regular.ttf", 20)
 
@@ -33,6 +36,7 @@ class Background:
             game_framework.change_state(main_state3)
         elif self.rock == False:
             Background.x -= 1
+            object.control()
 
     def draw(self):
         self.image.clip_draw(0, 0, 3425, 850, Background.x, 0)
@@ -42,13 +46,15 @@ class Background:
             if self.rock == False:
                 self.ob1x += 1
         if Background.x < 240:
-            self.obtacle.draw(240 - self.ob2x, 200)
+            self.obtacle.draw(240 - self.ob2x, 220)
             if self.rock == False:
                 self.ob2x += 1
         if Background.x < -500:
             self.obtacle.draw(240 - self.ob3x, 200)
             if self.rock == False:
                 self.ob3x += 1
+
+
     def control(self,key):
         if key == 'LEFT':
             self.rock = True
@@ -68,6 +74,41 @@ class Grass:
             self.image.draw(self.frame * 30 + 15, 15)
             self.frame += 1
         self.frame = self.frame % 16
+
+class Object:
+    def __init__(self):
+        self.ob = load_image('Obtacle1.png')
+        self.ob1 = load_image('Obtacle5.png')
+
+        self.ob1x, self.ob1y = 2280, 200
+
+        self.ob2x, self.ob2y = 350, 200
+
+
+
+
+
+    def update(self):
+        pass
+
+
+
+
+
+
+    def draw(self):
+        if background.x <= -330:
+            self.ob.draw(self.ob1x, self.ob1y)
+        else:
+            self.ob1.draw(self.ob1x, self.ob1y)
+
+        if background.x <= 350:
+            self.ob.draw(self.ob2x, self.ob2y)
+        else:
+            self.ob1.draw(self.ob2x, self.ob2y)
+
+    def control(self):
+        self.ob1x -= 1
 
 
 
@@ -146,18 +187,19 @@ class Boy:
 
 
 def enter():
-    global boy, grass, background
+    global boy, grass, background, object
     background = Background()
     boy = Boy()
     grass = Grass()
+    object = Object()
 
 
 def exit():
-    global boy, grass, background
+    global boy, grass, background, object
     del(background)
     del(boy)
     del(grass)
-
+    del (object)
 
 def pause():
     pass
@@ -200,7 +242,9 @@ def draw():
     background.draw()
     #grass.draw()
     boy.draw()
+    object.draw()
     update_canvas()
+
 
 
 

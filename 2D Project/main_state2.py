@@ -13,6 +13,7 @@ name = "MainState2"
 boy = None
 grass = None
 background = None
+object = None
 font = None
 
 
@@ -32,14 +33,12 @@ class Background:
             game_framework.change_state(main_state4)
         else:
             Background.x -= 1
+            object.control()
     def draw(self):
 
         self.image.clip_draw(0, 0, 3425, 580, Background.x, 135)
         self.now_pos.draw(400, 400, '%d' % Background.x, (200, 0, 100))
-        if Background.x < 1600:
-            self.obtacle.draw(240 - self.ob1x, 70)
-            if self.rock == False:
-                self.ob1x += 1
+
         if Background.x < 800:
             self.obtacle.draw(240 - self.ob2x, 150)
             if self.rock == False:
@@ -67,6 +66,29 @@ class Grass:
             self.frame += 1
         self.frame = self.frame % 16
 
+class Object:
+    def __init__(self):
+        self.ob = load_image('Obtacle1.png')
+        self.ob1 = load_image('Obtacle5.png')
+
+        self.ob1x, self.ob1y = 350, 200
+
+
+
+
+    def update(self):
+        pass
+
+
+    def draw(self):
+
+        if background.x <= 1600:
+            self.ob.draw(self.ob1x, self.ob1y)
+        else:
+            self.ob1.draw(self.ob1x, self.ob1y)
+
+    def control(self):
+        self.ob1x -= 1
 
 
 
@@ -143,17 +165,19 @@ class Boy:
 
 
 def enter():
-    global boy, grass, background
+    global boy, grass, background, object
     background = Background()
     boy = Boy()
     grass = Grass()
+    object = Object()
 
 
 def exit():
-    global boy, grass, background
+    global boy, grass, background, object
     del(background)
     del(boy)
     del(grass)
+    del(object)
 
 
 def pause():
@@ -196,6 +220,7 @@ def draw():
     clear_canvas()
     background.draw()
     #grass.draw()
+    object.draw()
     boy.draw()
     update_canvas()
 
