@@ -117,22 +117,22 @@ class Boy:
         elif self.Lstate == True:
             self.x -= 1
         if self.jump == True:
-            self.jumpdir1 += 2
+            self.jumpdir1 += 3
             if self.djump == True:
                 self.jump = False
             if self.jumpdir1 > 100:
                 self.jump = False
         elif self.jumpdir2 == 0:
-            self.jumpdir1 -= 2
+            self.jumpdir1 -= 3
             if self.jumpdir1 < 0:
                 self.jumpdir1 = 0
                 self.jumprock = False
         if self.djump == True:
-            self.jumpdir2 += 2
+            self.jumpdir2 += 3
             if self.jumpdir2 > 100:
                 self.djump = False
         else :
-            self.jumpdir2 -= 2
+            self.jumpdir2 -= 3
             if self.jumpdir2 < 0:
                 self.jumpdir2 = 0
         delay(0.01)

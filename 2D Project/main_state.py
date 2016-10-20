@@ -82,17 +82,9 @@ class Object:
 
         self.ob1x, self.ob1y = 2280, 200
 
-        self.ob2x, self.ob2y = 350, 200
-
-
-
-
 
     def update(self):
         pass
-
-
-
 
 
 
@@ -102,10 +94,7 @@ class Object:
         else:
             self.ob1.draw(self.ob1x, self.ob1y)
 
-        if background.x <= 350:
-            self.ob.draw(self.ob2x, self.ob2y)
-        else:
-            self.ob1.draw(self.ob2x, self.ob2y)
+
 
     def control(self):
         self.ob1x -= 1
@@ -140,22 +129,22 @@ class Boy:
             self.x -= 1
         # 점프
         if self.jump == True:
-            self.jumpdir1 += 2
+            self.jumpdir1 += 3
             if self.djump == True:
                 self.jump = False
             if self.jumpdir1 > 100:
                 self.jump = False
         elif self.jumpdir2 == 0:
-            self.jumpdir1 -= 2
+            self.jumpdir1 -= 3
             if self.jumpdir1 < 0:
                 self.jumpdir1 = 0
                 self.jumprock = False
         if self.djump == True:
-            self.jumpdir2 += 2
+            self.jumpdir2 += 3
             if self.jumpdir2 > 100:
                 self.djump = False
         else :
-            self.jumpdir2 -= 2
+            self.jumpdir2 -= 3
             if self.jumpdir2 < 0:
                 self.jumpdir2 = 0
         delay(0.01)
