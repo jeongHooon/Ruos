@@ -12,7 +12,6 @@ import main_state3
 name = "MainState"
 
 boy = None
-grass = None
 background = None
 object = None
 font = None
@@ -61,20 +60,6 @@ class Background:
         elif key == 'RIGHT':
             self.rock = False
 
-class Grass:
-    def __init__(self):
-        self.image = load_image('bottom.png')
-        self.frame = 0
-
-    def update(self):
-        pass
-
-    def draw(self):
-        while(self.frame < 16):
-            self.image.draw(self.frame * 30 + 15, 15)
-            self.frame += 1
-        self.frame = self.frame % 16
-
 class Object:
     def __init__(self):
         self.ob = load_image('Obtacle1.png')
@@ -82,11 +67,8 @@ class Object:
 
         self.ob1x, self.ob1y = 2280, 200
 
-
     def update(self):
         pass
-
-
 
     def draw(self):
         if background.x <= -330:
@@ -94,11 +76,8 @@ class Object:
         else:
             self.ob1.draw(self.ob1x, self.ob1y)
 
-
-
     def control(self):
         self.ob1x -= 1
-
 
 
 class Boy:
@@ -176,18 +155,16 @@ class Boy:
 
 
 def enter():
-    global boy, grass, background, object
+    global boy, background, object
     background = Background()
     boy = Boy()
-    grass = Grass()
     object = Object()
 
 
 def exit():
-    global boy, grass, background, object
+    global boy, background, object
     del(background)
     del(boy)
-    del(grass)
     del (object)
 
 def pause():

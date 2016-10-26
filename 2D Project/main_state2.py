@@ -52,19 +52,6 @@ class Background:
             self.rock = True
         elif key == 'RIGHT':
             self.rock = False
-class Grass:
-    def __init__(self):
-        self.image = load_image('bottom.png')
-        self.frame = 0
-
-    def update(self):
-        pass
-
-    def draw(self):
-        while(self.frame < 16):
-            self.image.draw(self.frame * 30 + 15, 15)
-            self.frame += 1
-        self.frame = self.frame % 16
 
 class Object:
     def __init__(self):
@@ -72,9 +59,6 @@ class Object:
         self.ob1 = load_image('Obtacle5.png')
 
         self.ob1x, self.ob1y = 350, 200
-
-
-
 
     def update(self):
         pass
@@ -142,7 +126,6 @@ class Boy:
             self.Lstate = True
         elif key == 'RIGHT':
             self.Rstate = True
-            #self.x += 5
         elif key == 'SPACE':
             if self.djump == False and self.jumpdir2 == 0 and self.jumprock == False:
                 self.jump = True
@@ -212,14 +195,12 @@ def handle_events():
 
 
 def update():
-    #grass.update()
     boy.update()
 
 
 def draw():
     clear_canvas()
     background.draw()
-    #grass.draw()
     object.draw()
     boy.draw()
     update_canvas()

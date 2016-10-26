@@ -12,7 +12,6 @@ import main_state2
 name = "MainState3"
 
 boy = None
-grass = None
 background = None
 object = None
 font = None
@@ -401,7 +400,7 @@ class Boy:
 
 
 def enter():
-    global boy, grass, background, object
+    global boy, background, object
     background = Background()
     boy = Boy()
     object = Object()
@@ -409,7 +408,7 @@ def enter():
 
 
 def exit():
-    global boy, grass, background, object
+    global boy, background, object
     del(background)
     del(boy)
     del(object)
@@ -448,7 +447,6 @@ def handle_events():
 
 
 def update():
-    #grass.update()
     boy.update()
     object.update()
 
@@ -456,7 +454,6 @@ def update():
 def draw():
     clear_canvas()
     background.draw()
-    #grass.draw()
     boy.draw()
     object.draw()
     update_canvas()
