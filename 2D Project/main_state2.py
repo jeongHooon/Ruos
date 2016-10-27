@@ -92,17 +92,17 @@ class Boy:
 
     def update(self):
         self.frame = (self.frame + 1) % 8
-        if self.Rstate == True:
+        if self.Rstate:
             if self.x == 240:
                 background.control('RIGHT')
                 background.update()
             else :
                 self.x += 1
-        elif self.Lstate == True:
+        elif self.Lstate:
             self.x -= 1
-        if self.jump == True:
+        if self.jump:
             self.jumpdir1 += 3
-            if self.djump == True:
+            if self.djump:
                 self.jump = False
             if self.jumpdir1 > 100:
                 self.jump = False
@@ -111,7 +111,7 @@ class Boy:
             if self.jumpdir1 < 0:
                 self.jumpdir1 = 0
                 self.jumprock = False
-        if self.djump == True:
+        if self.djump:
             self.jumpdir2 += 3
             if self.jumpdir2 > 100:
                 self.djump = False
@@ -151,7 +151,7 @@ def enter():
     global boy, grass, background, object
     background = Background()
     boy = Boy()
-    grass = Grass()
+
     object = Object()
 
 
