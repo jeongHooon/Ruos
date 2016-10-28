@@ -358,22 +358,22 @@ class Boy:
                 self.jumpdir2 = 0
         delay(0.01)
 
-    def event(self, key):
-        if key == 'LEFT':
+    def handle_events(self, event):
+        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
             self.Lstate = True
-        elif key == 'RIGHT':
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
             self.Rstate = True
             #self.x += 5
-        elif key == 'SPACE':
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             if self.djump == False and self.jumpdir2 == 0 and self.jumprock == False:
                 self.jump = True
                 if self.jump == True and self.jumpdir1 > 0:
                         self.djump = True
                         self.jumprock = True
-        elif key == 'RCANCLE':
+        elif (event.type, event.key) == (SDL_KEYUP, SDLK_RIGHT):
             self.Rstate = False
             background.control('LEFT')
-        elif key == 'LCANCLE':
+        elif (event.type, event.key) == (SDL_KEYUP, SDLK_LEFT):
             self.Lstate = False
 
     def draw(self):
@@ -416,16 +416,8 @@ def handle_events():
             game_framework.quit()
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.change_state(title_state)
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                boy.event('SPACE')
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
-                boy.event('LEFT')
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
-                boy.event('RIGHT')
-        elif (event.type, event.key) == (SDL_KEYUP, SDLK_RIGHT):
-                boy.event('RCANCLE')
-        elif (event.type, event.key) == (SDL_KEYUP, SDLK_LEFT):
-                boy.event('LCANCLE')
+        else:
+                boy.handle_events(event)
         #elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
                 #game_framework.change_state(main_state3)
 
