@@ -418,12 +418,9 @@ def handle_events():
                 game_framework.change_state(title_state)
         else:
                 boy.handle_events(event)
-        #elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                #game_framework.change_state(main_state3)
 
 
 def update():
-    #grass.update()
     boy.update()
     object.update()
 
@@ -431,7 +428,6 @@ def update():
 def draw():
     clear_canvas()
     background.draw()
-    #grass.draw()
     boy.draw()
     object.draw()
     update_canvas()

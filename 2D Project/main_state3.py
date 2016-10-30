@@ -16,7 +16,6 @@ background = None
 object = None
 font = None
 
-
 class Background:
     x = 1710
     def __init__(self):
@@ -397,8 +396,6 @@ class Boy:
             self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
 
 
-
-
 def enter():
     global boy, background, object
     background = Background()
@@ -412,7 +409,6 @@ def exit():
     del(background)
     del(boy)
     del(object)
-
 
 
 def pause():
@@ -434,8 +430,6 @@ def handle_events():
             game_framework.change_state(main_state2)
         else:
             boy.handle_events(event)
-        #elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                #game_framework.change_state(main_state3)
 
 
 def update():

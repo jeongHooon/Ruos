@@ -16,7 +16,6 @@ background = None
 object = None
 font = None
 
-
 class Background:
     x = 1710
     def __init__(self):
