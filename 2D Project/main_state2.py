@@ -126,7 +126,6 @@ class Boy:
             self.Lstate = True
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
             self.Rstate = True
-            #self.x += 5
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             if self.djump == False and self.jumpdir2 == 0 and self.jumprock == False:
                 self.jump = True
