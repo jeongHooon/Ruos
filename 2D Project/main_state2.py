@@ -145,8 +145,6 @@ class Boy:
             self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
 
 
-
-
 def enter():
     global boy, grass, background, object
     background = Background()
@@ -166,7 +164,6 @@ def exit():
 def pause():
     pass
 
-
 def resume():
     pass
 
@@ -182,8 +179,7 @@ def handle_events():
             game_framework.change_state(main_state4)
         else:
             boy.handle_events(event)
-        #elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                #game_framework.change_state(main_state3)
+
 
 
 def update():
