@@ -181,7 +181,6 @@ def handle_events():
             boy.handle_events(event)
 
 
-
 def update():
     boy.update()
 

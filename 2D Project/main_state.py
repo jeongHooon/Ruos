@@ -185,8 +185,7 @@ def handle_events():
             game_framework.change_state(main_state3)
         else:
             boy.handle_events(event)
-        #elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                #game_framework.change_state(main_state3)
+
 
 
 def update():

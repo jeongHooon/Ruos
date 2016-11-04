@@ -402,8 +402,6 @@ def enter():
     boy = Boy()
     object = Object()
 
-
-
 def exit():
     global boy, background, object
     del(background)
