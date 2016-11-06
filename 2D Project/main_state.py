@@ -186,10 +186,8 @@ def handle_events():
         else:
             boy.handle_events(event)
 
-
-
 def update():
-    #grass.update()
+
     boy.update()
 
 
