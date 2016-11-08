@@ -194,7 +194,6 @@ def update():
 def draw():
     clear_canvas()
     background.draw()
-    #grass.draw()
     boy.draw()
     object.draw()
     update_canvas()
