@@ -190,7 +190,6 @@ def update():
 
     boy.update()
 
-
 def draw():
     clear_canvas()
     background.draw()
