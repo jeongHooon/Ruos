@@ -169,10 +169,8 @@ def exit():
 def pause():
     pass
 
-
 def resume():
     pass
-
 
 def handle_events():
     events = get_events()
