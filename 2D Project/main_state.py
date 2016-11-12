@@ -151,8 +151,6 @@ class Boy:
         else:
             self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y + self.jumpdir1 + self.jumpdir2)
 
-
-
 def enter():
     global boy, background, object
     background = Background()
