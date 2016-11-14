@@ -8,6 +8,7 @@ import game_framework
 import title_state
 import main_state2
 #import main_state3
+import pause_state
 
 name = "MainState3"
 
@@ -377,6 +378,8 @@ class Boy:
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_RIGHT):
             self.Rstate = True
             #self.x += 5
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_q):
+            game_framework.change_state(pause_state)
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             if self.djump == False and self.jumpdir2 == 0 and self.jumprock == False:
                 self.jump = True

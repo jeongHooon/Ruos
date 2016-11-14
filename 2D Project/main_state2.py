@@ -7,7 +7,7 @@ from pico2d import *
 import game_framework
 import title_state
 import main_state4
-
+import pause_state
 name = "MainState2"
 
 boy = None
@@ -177,6 +177,8 @@ def handle_events():
                 game_framework.change_state(title_state)
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_a):
             game_framework.change_state(main_state4)
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_q):
+            game_framework.change_state(pause_state)
         else:
             boy.handle_events(event)
 

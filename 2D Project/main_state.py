@@ -8,6 +8,7 @@ import game_framework
 import title_state
 import main_state2
 import main_state3
+import pause_state
 
 name = "MainState"
 
@@ -176,6 +177,8 @@ def handle_events():
             game_framework.quit()
         elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             game_framework.change_state(title_state)
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_q):
+            game_framework.change_state(pause_state)
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_a):
             game_framework.change_state(main_state3)
         else:
