@@ -1,16 +1,19 @@
+import random
+import json
+import os
 import game_framework
 from pico2d import *
 
 
 import main_state
+import title_state
 
-score_data = [{"Time":10.5,"x":100,"y":500},{"Time":20.5,"x":300,"y":200},{"Time":30.5,"x":150,"y":400},{"Time":40.5,"x":100,"y":500},{"Time":50.5,"x":300,"y":200},{"Time":60.5,"x":150,"y":400},{"Time":70.5,"x":150,"y":400},{"Time":90.5,"x":150,"y":400},{"Time":57.5,"x":150,"y":400},{"Time":67,"x":150,"y":400}]
 name = "RankingState"
 image = None
 
 def enter():
     global image, font
-    font = load_font('ENCR10B.TTF', 40)
+    font = load_font("lazy_sunday_regular.ttf", 20)
     image = load_image('blackboard.png')
 
 def exit():
@@ -34,6 +37,8 @@ def handle_events(frame_time):
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
+            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_q):
+                    game_framework.quit(title_state)
 
 
 
@@ -60,7 +65,7 @@ def draw_ranking():
         font.draw(100, 500 - y*50, "Time :%4.1f, x :%3d, y :%3d" % (score['Time'], score['x'], score['y']))
         y = y+1
 
-#draw_ranking()
+
 
 
 def draw(frame_time):
@@ -68,6 +73,7 @@ def draw(frame_time):
     clear_canvas()
     image.draw(400, 300)
     font.draw(290, 550,'[RANKING]', (255, 0, 0))
+    draw_ranking()
 
 
 

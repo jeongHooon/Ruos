@@ -187,13 +187,13 @@ class Boy:
         elif self.colideX <= 1620 and self.colideX >= 1542 and self.y < 100:
             self.x -= (self.dir * distance)
         elif self.colideX <= 470 and self.colideX >= 418 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX <= 242 and self.colideX >= 212 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX <= -283 and self.colideX >= -315 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX <= -494 and self.colideX >= -505 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.y <=0:
             self.dropY = 60
             self.life_count -= 1
@@ -251,8 +251,8 @@ class Boy:
             self.image.clip_draw(208, 832, 32, 48, self.x, self.y )
         else:
             self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y )
-        self.now_pos.draw(200, 400, '%d' % self.life_count, (200, 0, 100))
-        self.now_pos.draw(250, 400, '%d' % self.life_time, (200, 0, 100))
+        self.now_pos.draw(170, 400, 'life : %d' % self.life_count, (200, 0, 100))
+        self.now_pos.draw(250, 400, 'time : %d' % self.life_time, (200, 0, 100))
 
 def enter():
     global boy, background, object

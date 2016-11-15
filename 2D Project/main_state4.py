@@ -284,8 +284,8 @@ class Object:
         self.ob.draw(self.ob2x, self.ob2y)
         self.ob.draw(self.ob3x, self.ob3y)
         self.ob.draw(self.ob4x, self.ob4y)
-        self.ob.draw(self.ob5x, self.ob5y)
-        self.ob.draw(self.ob6x, self.ob6y)
+        #self.ob.draw(self.ob5x, self.ob5y)
+        #self.ob.draw(self.ob6x, self.ob6y)
         self.ob.draw(self.ob7x, self.ob7y)
         self.ob.draw(self.ob8x, self.ob8y)
         self.ob.draw(self.ob9x, self.ob9y)
@@ -387,13 +387,13 @@ class Boy:
             if self.jumpdir2 < 0:
                 self.jumpdir2 = 0
         if self.colideX >= 1596 and self.colideX <= 1272 and self.y <= 150:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX >= 146 and self.colideX <= -6 and self.y <= 150:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX >= -388 and self.colideX <= -413 and self.y <= 150:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX >= -473 and self.colideX <= -499 and self.y <= 150:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.y <= 0:
             self.dropY = 150
             self.life_count -= 1
@@ -450,8 +450,8 @@ class Boy:
             self.image.clip_draw(208, 832, 32, 48, self.x, self.y )
         else:
             self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y )
-        self.now_pos.draw(200, 400, '%d' % self.life_count, (200, 0, 100))
-        self.now_pos.draw(250, 400, '%d' % self.life_time, (200, 0, 100))
+        self.now_pos.draw(170, 400, 'life : %d' % self.life_count, (200, 0, 100))
+        self.now_pos.draw(250, 400, 'time : %d' % self.life_time, (200, 0, 100))
 
 
 

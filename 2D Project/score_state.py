@@ -1,9 +1,14 @@
+import random
+import json
+import os
 import game_framework
 from pico2d import *
+import title_state
 import main_state
 import main_state2
 import main_state3
 import main_state4
+import ranking_state
 
 
 name = "Score_state"
@@ -16,12 +21,25 @@ def enter():
     f = open('life.txt', 'r')
     life = json.load(f)
     f.close()
+
+
+
     now_pos = load_font("lazy_sunday_regular.ttf", 20)
     image = load_image('blackboard.png')
 
 
 def exit():
     global image, life, now_pos
+    result = (1000 * life['life'] + 3000 - 10 * life['time'])
+
+    f = open('ranking_data.txt', 'r')
+    score = json.load(f)
+    f.close()
+
+    #score.append({'time': life['time'], 'life': life['life'], 'score': result})
+    #f = open('ranking_data.txt', 'w')
+    #json.dump(score, f)
+    #f.close()
     del(image)
     del(life)
     del(now_pos)
@@ -36,7 +54,8 @@ def handle_events(frame_time):
             if(event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif(event.type, event.key) == (SDL_KEYDOWN, SDLK_q):
-                game_framework.change_state(main_state)
+                #game_framework.change_state(ranking_state)
+                game_framework.change_state(title_state)
 
 def draw(frame_time):
     clear_canvas()

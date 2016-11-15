@@ -153,7 +153,7 @@ class Boy:
             if self.jumpdir2 < 0:
                 self.jumpdir2 = 0
         if self.colideX >=210 and self.colideX <= 2550 and self.y <= 150:
-            self.dropY -= 1
+            self.dropY -= 3
 
         elif self.y <=0:
             self.dropY = 150

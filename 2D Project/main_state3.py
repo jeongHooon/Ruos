@@ -406,13 +406,13 @@ class Boy:
             if self.jumpdir2 < 0:
                 self.jumpdir2 = 0
         if self.colideX <= 1665 and self.colideX >= 1651 and self.y <= 150:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX <= 1395 and self.colideX >= 1353 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX <= 1266 and self.colideX >= 1225 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.colideX <= 470 and self.colideX >= 418 and self.y <= 60:
-            self.dropY -= 1
+            self.dropY -= 3
         elif self.y <=0:
             self.dropY = 150
             self.life_count -= 1
@@ -465,8 +465,8 @@ class Boy:
             self.image.clip_draw(208, 832, 32, 48, self.x, self.y )
         else:
             self.image.clip_draw(16 + self.frame * 64, 896, 32, 48, self.x, self.y)
-        self.now_pos.draw(200, 400, '%d' % self.life_count, (200, 0, 100))
-        self.now_pos.draw(250, 400, '%d' % self.life_time, (200, 0, 100))
+        self.now_pos.draw(170, 400, 'life : %d' % self.life_count, (200, 0, 100))
+        self.now_pos.draw(250, 400, 'time : %d' % self.life_time, (200, 0, 100))
 
     def get_bb(self):
         return self.x - 10, self.y - 15, self.x + 10, self.y + 15
@@ -521,7 +521,7 @@ def update(frame_time):
 def draw(frame_time):
     clear_canvas()
     background.draw()
-    boy.draw_bb()
+    #boy.draw_bb()
     boy.draw(frame_time)
     object.draw()
     update_canvas()
