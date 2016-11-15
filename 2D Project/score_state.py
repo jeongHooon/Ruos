@@ -6,19 +6,25 @@ import main_state3
 import main_state4
 
 
-name = "PauseState"
+name = "Score_state"
 image = None
 logo_time = 0.0
 
 
 def enter():
-    global image
-    image = load_image('title.png')
+    global image, life, now_pos
+    f = open('life.txt', 'r')
+    life = json.load(f)
+    f.close()
+    now_pos = load_font("lazy_sunday_regular.ttf", 20)
+    image = load_image('blackboard.png')
 
 
 def exit():
-    global image
+    global image, life, now_pos
     del(image)
+    del(life)
+    del(now_pos)
 
 
 def handle_events(frame_time):
@@ -35,6 +41,11 @@ def handle_events(frame_time):
 def draw(frame_time):
     clear_canvas()
     image.draw(240, 210)
+
+    now_pos.draw(205, 300, 'Life : %d' % life['life'], (200, 0, 100))
+    now_pos.draw(160, 250, 'Play Time : %d min %d sec ' % (life['time'] / 60, life['time'] % 60), (200, 0, 100))
+    now_pos.draw(100, 200, '1000 * %d + 3000 - (%d * 10) = %d' % (life['life'], life['time'],1000*life['life']+ 3000 - 10*life['time']), (200, 0, 100))
+    now_pos.draw(190, 150, 'SCORE : %d' % (1000 * life['life'] + 3000 - 10 * life['time']), (200, 0, 100))
     update_canvas()
 
 def update(frame_time):

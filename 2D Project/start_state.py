@@ -19,11 +19,11 @@ def exit():
     close_canvas()
 
 
-def update():
+def update(frame_time):
     pass
 
 
-def draw():
+def draw(frame_time):
     global image
     clear_canvas()
     image.draw(240, 210)
@@ -32,7 +32,7 @@ def draw():
 
 
 
-def handle_events():
+def handle_events(frame_time):
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:

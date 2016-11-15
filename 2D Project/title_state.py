@@ -18,7 +18,8 @@ def exit():
     del(image)
 
 
-def handle_events():
+def handle_events(frame_time):
+
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -27,12 +28,12 @@ def handle_events():
             if(event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
 
-def draw():
+def draw(frame_time):
     clear_canvas()
     image.draw(240, 210)
     update_canvas()
 
-def update():
+def update(frame_time):
     global logo_time
     if (logo_time > 1.0):
         logo_time = 0
