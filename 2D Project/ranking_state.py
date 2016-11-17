@@ -4,8 +4,6 @@ import os
 import game_framework
 from pico2d import *
 
-
-import main_state
 import title_state
 
 name = "RankingState"
@@ -44,7 +42,6 @@ def handle_events(frame_time):
 
 def update(frame_time):
     pass
-
 
 def bubble_sort(data_list):
     for i in range(0, len(data_list)):
