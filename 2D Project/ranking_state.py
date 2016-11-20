@@ -5,7 +5,7 @@ import game_framework
 from pico2d import *
 
 import title_state
-
+import score_state
 name = "RankingState"
 image = None
 
@@ -37,6 +37,8 @@ def handle_events(frame_time):
                 game_framework.quit()
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_q):
                     game_framework.quit(title_state)
+            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_a):
+                    game_framework.change_state(score_state)
 
 
 
