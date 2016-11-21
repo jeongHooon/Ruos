@@ -33,6 +33,9 @@ class Background:
         self.ob3x = 0
         self.ob3y = 0
         self.ob4x = 0
+        self.bgm = load_music("BGM/dungeon.mp3")
+        self.bgm.set_volume(60)
+        self.bgm.repeat_play()
     def update(self,frame_time):
         if Background.x == -1230:
             game_framework.change_state(score_state)

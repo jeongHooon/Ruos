@@ -43,6 +43,9 @@ class Background:
         self.total_frames = 0.0
         self.dir = 1
         self.now_pos = load_font("lazy_sunday_regular.ttf", 20)
+        self.bgm = load_music("BGM/field.mp3")
+        self.bgm.set_volume(60)
+        self.bgm.repeat_play()
 
     def update(self,frame_time):
         self.life_time += frame_time

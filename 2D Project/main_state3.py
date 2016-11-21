@@ -35,6 +35,10 @@ class Background:
         self.ob4y = 70
         self.ob5x = 0
         self.ob5y = 170
+        self.bgm = load_music("BGM/field.mp3")
+        self.bgm.set_volume(60)
+        self.bgm.repeat_play()
+
     def update(self):
         if Background.x == -1230:
             game_framework.change_state(main_state2)
