@@ -128,7 +128,8 @@ class Boy:
         self.life_time = 0.0
         self.total_frames = 0.0
         self.dir = 0
-
+        self.jump_sound = load_wav('SE/jump.wav')
+        self.jump_sound.set_volume(50)
         self.life_count = 10
         self.state = self.RIGHT_STAND
         self.image = load_image('player2.png')
@@ -244,10 +245,12 @@ class Boy:
             Background.x = -1200
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             if self.djump == False and self.jumpdir2 == 0 and self.jumprock == False:
+                self.jump_sound.play()
                 self.jump = True
                 if self.jump == True and self.jumpdir1 > 0:
                         self.djump = True
                         self.jumprock = True
+
 
     def draw(self,frame_time):
         if self.jumpdir1 :
