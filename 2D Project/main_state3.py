@@ -367,6 +367,8 @@ class Boy:
         self.life_count = self.life['life']
         self.now_pos = load_font("lazy_sunday_regular.ttf", 20)
         self.image = load_image('player2.png')
+        self.jump_sound = load_wav('SE/jump.wav')
+        self.jump_sound.set_volume(50)
 
     def update(self,frame_time):
         self.life_time += frame_time
@@ -458,6 +460,7 @@ class Boy:
             Background.x = -1200
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             if self.djump == False and self.jumpdir2 == 0 and self.jumprock == False:
+                self.jump_sound.play()
                 self.jump = True
                 if self.jump == True and self.jumpdir1 > 0:
                         self.djump = True
