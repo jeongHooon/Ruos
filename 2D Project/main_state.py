@@ -6,7 +6,6 @@ from pico2d import *
 
 import game_framework
 import title_state
-import main_state2
 import main_state3
 import pause_state
 import score_state
