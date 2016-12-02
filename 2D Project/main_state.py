@@ -155,9 +155,6 @@ class Boy:
                 self.x += (self.dir * distance)
         else:
             self.x += (self.dir * distance)
-        #elif self.Lstate:
-            #self.x -= 1
-        # 점프
         if self.jump:
             self.jumpdir1 += 3
             if self.djump:
