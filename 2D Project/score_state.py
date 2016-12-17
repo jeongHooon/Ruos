@@ -4,12 +4,6 @@ import os
 import game_framework
 from pico2d import *
 import title_state
-import main_state
-import main_state2
-import main_state3
-import main_state4
-import ranking_state
-
 
 name = "Score_state"
 image = None
