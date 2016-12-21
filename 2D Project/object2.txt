@@ -1,0 +1,5 @@
+{
+"ob1" : {"left" : 1450, "right" : 1530, "bottom" : 150, "top" : 220},
+"ob2" : {"left" : 1000, "right" : 1100, "bottom" : 150, "top" : 220},
+"ob3" : {"left" : 1950, "right" : 2030, "bottom" : 150, "top" : 220}
+}

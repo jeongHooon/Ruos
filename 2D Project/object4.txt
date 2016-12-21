@@ -1,0 +1,4 @@
+{
+"bottom1" : {"left" : 0, "right" : 3425, "bottom" : 0, "top" : 135}
+
+}
