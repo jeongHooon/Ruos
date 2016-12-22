@@ -1,0 +1,8 @@
+{
+    "fire1" : {"left" : 275, "right" : 310, "bottom" : 165, "top" : 195, "state" : 1, "tag" : 1},
+    "fire2" : {"left" : 2750, "right" : 2770, "bottom" : 135, "top" : 195, "state" : 1, "tag" : 2},
+    "fire3" : {"left" : 2850, "right" : 2870, "bottom" : 135, "top" : 195, "state" : 1, "tag" : 3},
+    "fire4" : {"left" : 2940, "right" : 2960, "bottom" : 135, "top" : 195, "state" : 1, "tag" : 4},
+    "fire5" : {"left" : 690, "right" : 730, "bottom" : 255, "top" : 315, "state" : 1, "tag" : 5},
+    "laser" : {"left" : 2467, "right" : 2497, "bottom" : 135, "top" : 165, "state" : 1, "tag" : 6}
+}

@@ -1,4 +1,13 @@
 {
-"bottom1" : {"left" : 0, "right" : 3425, "bottom" : 0, "top" : 135}
-
+"bottom1" : {"left" : 0, "right" : 275, "bottom" : 0, "top" : 135},
+"bottom2" : {"left" : 310, "right" : 545, "bottom" : 0, "top" : 135},
+"bottom3" : {"left" : 610, "right" : 677, "bottom" : 0, "top" : 135},
+"bottom4" : {"left" : 740, "right" : 2220, "bottom" : 0, "top" : 135},
+"bottom5" : {"left" : 2220, "right" : 2467, "bottom" : 0, "top" : 45},
+"bottom6" : {"left" : 2467, "right" : 2555, "bottom" : 0, "top" : 135},
+"bottom7" : {"left" : 2555, "right" : 2620, "bottom" : 0, "top" : 45},
+"bottom8" : {"left" : 2620, "right" : 3004, "bottom" : 0, "top" : 135},
+"bottom9" : {"left" : 3004, "right" : 3070, "bottom" : 0, "top" : 165},
+"bottom10" : {"left" : 3070, "right" : 3425, "bottom" : 0, "top" : 45},
+"ob1" : {"left" : 630, "right" : 650, "bottom" : 227, "top" : 256}
 }

@@ -48,11 +48,11 @@ def update(frame_time):
 def bubble_sort(data_list):
     for i in range(0, len(data_list)):
         for j in range(i + 1, len(data_list)):
-            if data_list[i]['Time'] < data_list[j]['Time']:
+            if data_list[i]['score'] < data_list[j]['score']:
                 data_list[i], data_list[j] = data_list[j], data_list[i]
 def draw_ranking():
     def print_score(score):
-        font.draw(200, score*50,"Time :%4.1f, x :%3d, y :%3d" % (score['Time'], score['x'], score['y']))
+        font.draw(200, score*50,"Time :%4.1f, Life :%3d, Score :%3d" % (score['time'], score['life'], score['score']))
     f = open('ranking_data.txt', 'r')
     score_data = json.load(f)
     f.close()
@@ -61,7 +61,7 @@ def draw_ranking():
 
     y=0
     for score in score_data:
-        font.draw(100, 500 - y*50, "Time :%4.1f, x :%3d, y :%3d" % (score['Time'], score['x'], score['y']))
+        font.draw(100, 370 - y*30, "Time :%4.1f, Life :%3d, Score :%3d" % (score['time'], score['life'], score['score']),(255,255,255))
         y = y+1
 
 
@@ -71,7 +71,7 @@ def draw(frame_time):
     global image, font
     clear_canvas()
     image.draw(400, 300)
-    font.draw(290, 550,'[RANKING]', (255, 0, 0))
+    font.draw(200, 400,'[RANKING]', (255, 0, 0))
     draw_ranking()
 
 

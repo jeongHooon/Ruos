@@ -1,0 +1,7 @@
+{
+"ob1" : {"left" : 1450, "right" : 1530, "bottom" : 150, "top" : 220, "state" : 1, "tag" : 1},
+"ob2" : {"left" : 1000, "right" : 1100, "bottom" : 150, "top" : 220, "state" : 1, "tag" : 2},
+"ob3" : {"left" : 1950, "right" : 2030, "bottom" : 150, "top" : 220, "state" : 1, "tag" : 3},
+"ob4" : {"left" : 2960, "right" : 3000, "bottom" : 280, "top" : 330, "state" : 1, "tag" : 4},
+"ob5" : {"left" : 1700, "right" : 1750, "bottom" : 47, "top" : 77, "state" : 1, "tag" : 5}
+}

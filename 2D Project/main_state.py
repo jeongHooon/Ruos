@@ -7,9 +7,10 @@ object_data_file = open('object.txt', 'r')
 object_data = json.load(object_data_file)
 object_data_file.close()
 
-object_data_file2 = open('object2.txt', 'r')
+object_data_file2 = open('radar.txt', 'r')
 object_data2 = json.load(object_data_file2)
 object_data_file2.close()
+
 import game_framework
 import title_state
 import main_state3
@@ -62,9 +63,15 @@ class Background:
         elif not self.rock and Background.x > -1230:
             Background.x -= 1*distance
             for ob in object:
-                ob.control(frame_time)
-            for ra in rader:
-                ra.control(frame_time)
+                ob.control(frame_time,self.rock)
+            for ra in radar:
+                ra.control(frame_time,self.rock)
+        elif self.rock:
+            Background.x += 1 * distance
+            for ob in object:
+                ob.control(frame_time,self.rock)
+            for ra in radar:
+                ra.control(frame_time,self.rock)
 
     def draw(self):
         self.image.clip_draw(0, 0, 3425, 850, Background.x, 0)
@@ -123,17 +130,21 @@ class Object:
         pass
         #draw_rectangle(self.left, self.bottom, self.right, self.top)
 
-    def control(self, frame_time):
+    def control(self, frame_time,state):
         self.life_time += frame_time
         distance = Object.RUN_SPEED_PPS * frame_time
         self.total_frames += Object.FRAMES_PER_ACTION * Object.ACTION_PER_TIME * frame_time
-        self.left -= 1 * distance
-        self.right -= 1 * distance
+        if not state:
+            self.left -= 1 * distance
+            self.right -= 1 * distance
+        elif state:
+            self.left += 1 * distance
+            self.right += 1 * distance
 
     def get_bb(self):
         return self.left, self.bottom, self.right, self.top
 
-class Rader:
+class Radar:
 
     PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
     RUN_SPEED_KMPH = 20.0  # Km / Hour
@@ -152,6 +163,8 @@ class Rader:
         self.right = 0
         self.bottom = 0
         self.top = 0
+        self.state = 1
+        self.tag = 0
 
 
     def update(self, frame_time):
@@ -160,11 +173,13 @@ class Rader:
     def create(self):
         rader = []
         for name in object_data2:
-            ra = Rader()
+            ra = Radar()
+            ra.tag = object_data2[name]['tag']
             ra.left = object_data2[name]['left']
             ra.right = object_data2[name]['right']
             ra.bottom = object_data2[name]['bottom']
             ra.top = object_data2[name]['top']
+            ra.state = object_data2[name]['state']
             rader.append(ra)
         return rader
 
@@ -172,12 +187,16 @@ class Rader:
         pass
         #draw_rectangle(self.left, self.bottom, self.right, self.top)
 
-    def control(self, frame_time):
+    def control(self, frame_time,state):
         self.life_time += frame_time
         distance = Object.RUN_SPEED_PPS * frame_time
         self.total_frames += Object.FRAMES_PER_ACTION * Object.ACTION_PER_TIME * frame_time
-        self.left -= 1 * distance
-        self.right -= 1 * distance
+        if not state:
+            self.left -= 1 * distance
+            self.right -= 1 * distance
+        elif state:
+            self.left += 1 * distance
+            self.right += 1 * distance
 
     def get_bb(self):
         return self.left, self.bottom, self.right, self.top
@@ -208,13 +227,23 @@ class Laser:
         distance = Object.RUN_SPEED_PPS * frame_time
         self.total_frames += Object.FRAMES_PER_ACTION * Object.ACTION_PER_TIME * frame_time
         if self.laser:
-            self.lax -= 3 * distance
+            self.lax -= 5 * distance
 
     def draw(self):
         #draw_rectangle(*self.get_bb())
         if self.laser:
             self.la.draw(self.lax, self.lay)
-    def on_laser(self):
+    def on_laser(self,tag):
+        if tag == 1:
+            self.lay = 180
+        elif tag == 2:
+            self.lay = 180
+        elif tag == 3:
+            self.lay = 180
+        elif tag == 4:
+            self.lay = 320
+        elif tag == 5:
+            self.lay = 60
         self.lax = 500
         self.laser = True
 
@@ -261,31 +290,48 @@ class Boy:
         self.state = self.RIGHT_STAND
         self.image = load_image('player2.png')
         self.now_pos = load_font("lazy_sunday_regular.ttf", 20)
-
-
+        self.distance = 0
+        self.top = 0
 
 
     def update(self, frame_time):
 
         self.life_time += frame_time
         distance = Boy.RUN_SPEED_PPS * frame_time
+        self.distance = distance
         self.total_frames += Boy.FRAMES_PER_ACTION * Boy.ACTION_PER_TIME * frame_time
 
         self.frame = int(self.total_frames) % 8
         if self.over_count == 0:
-            #좌우이동
+            next_step = False
             if self.state == self.RIGHT_RUN:
                 if self.x >= 240:
-                    background.control('RIGHT')
-                    background.update(frame_time)
-                    self.colideX -= 1* distance
+                    for ob in object:
+                        if not next_collid(boy, ob):
+                            if not next_step:
+                                background.control('RIGHT')
+                                background.update(frame_time)
+                                self.colideX -= 1* distance
+                            next_step = True
+                        elif next_collid(boy, ob) and self.y < ob.top:
+                            background.control('LEFT')
+                            background.update(frame_time)
                 else :
-                    if not self.fall_state:
-                        print(25112)
-                        self.x += (self.dir * distance)
+                    for ob in object:
+                        if not next_collid(boy,ob):
+                            if not next_step:
+                                self.x += (self.dir * distance)
+                            next_step = True
+                        elif next_collid(boy, ob) and self.y < ob.top:
+                            self.x -= (self.dir * distance)
             else:
-                if not self.fall_state:
-                    self.x += (self.dir * distance)
+                for ob in object:
+                    if not next_collid(boy, ob):
+                        if not next_step:
+                            self.x += (self.dir * distance)
+                        next_step = True
+                    elif next_collid(boy, ob) and self.y < ob.top:
+                        self.x -= (self.dir * distance)
 
         if self.jump:
             self.jumpdir1 += 3
@@ -313,16 +359,9 @@ class Boy:
             self.dropY -=3
             if self.dropY < self.minY:
                 self.dropY = self.minY
-        if self.colideX <= 470 and self.colideX >= 418 and self.y <= 60:
-            self.dropY -= 3
-        elif self.colideX <= 242 and self.colideX >= 212 and self.y <= 60:
-            self.dropY -= 3
-        elif self.colideX <= -283 and self.colideX >= -315 and self.y <= 60:
-            self.dropY -= 3
-        elif self.colideX <= -494 and self.colideX >= -505 and self.y <= 60:
-            self.dropY -= 3
-        elif self.y <=0:
-            self.dropY = 63
+        if self.y <= 0:
+            self.dropY = 400
+            self.x -= 50
             self.life_count -= 1
         if self.life_count == 0:
             self.gameover_sound.play()
@@ -339,10 +378,6 @@ class Boy:
                 self.collid_stack = 0
                 self.collid_state = False
 
-
-        #self.life_count.append(self.life_count)
-
-
         delay(0.01)
 
     def clear_jump(self):
@@ -355,7 +390,7 @@ class Boy:
     def clear_fall(self):
         if not self.jump and not self.djump:
             self.fall_state = True
-            self.minY = 60
+            self.minY = 0
 
 
     def handle_events(self, frame_time,event):
@@ -393,9 +428,10 @@ class Boy:
     def get_bb(self):
         return self.x - 10, self.y - 15, self.x + 10, self.y + 15
 
+    def next_get_bb(self):
+        return self.x + (self.dir * self.distance) - 10, self.y - 15, self.x + (self.dir * self.distance) + 10, self.y + 15
     def draw_bb(self):
-        #draw_rectangle(*self.get_bb())
-        pass
+        draw_rectangle(*self.get_bb())
     def collid_laser(self):
         if not self.collid_state and self.over_count == 0:
             self.life_count -= 1
@@ -416,8 +452,9 @@ class Boy:
             print("collid2")
 
     def draw(self):
-        #self.now_pos.draw(400, 300, '%d' % self.colideX, (200, 0, 100))
-        self.draw_bb()
+        if self.collid_stack > 0 and self.collid_stack < 100:
+            self.now_pos.draw(200, 200, "Collide", (200, 0, 100))
+        #self.draw_bb()
         if self.jumpdir1 > 0:
             self.image.clip_draw(208, 832, 32, 48, self.x, self.y)
         else:
@@ -426,15 +463,15 @@ class Boy:
         self.now_pos.draw(250, 400, 'time : %d' % self.life_time, (200, 0, 100))
 
 def enter():
-    global boy, background, object , rader,laser
+    global boy, background, object , radar,laser
     background = Background()
     boy = Boy()
     laser = Laser()
-    rader = Rader().create()
+    radar = Radar().create()
     object = Object().create()
 
 def exit():
-    global boy, background, object,rader,laser
+    global boy, background, object,radar,laser
 
 
     f = open('life.txt', 'w')
@@ -443,7 +480,7 @@ def exit():
     del(background)
     del(boy)
     del(object)
-    del(rader)
+    del(radar)
     del(laser)
 
 def pause():
@@ -454,6 +491,16 @@ def resume():
 
 def collid(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
+    return True
+def next_collid(a, b):
+    left_a, bottom_a, right_a, top_a = a.next_get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
 
     if left_a > right_b: return False
@@ -480,10 +527,15 @@ def handle_events(frame_time):
 def update(frame_time):
     state = False
 
-    boy.update(frame_time)
+
     laser.update(frame_time)
     if collid(boy,laser):
         boy.collid_laser()
+    for ra in radar:
+        ra.update(frame_time)
+        if collid(boy, ra) and ra.state == 1:
+            laser.on_laser(ra.tag)
+            ra.state = 0
     for ob in object:
         if collid(boy, ob):
             boy.fall()
@@ -491,18 +543,14 @@ def update(frame_time):
         elif not state:
             boy.clear_fall()
             #background.not_collid()
-    for ra in rader:
-        ra.update(frame_time)
-        if collid(boy, ra):
-            laser.on_laser()
-
+    boy.update(frame_time)
 def draw(frame_time):
     clear_canvas()
     background.draw()
     boy.draw()
     for ob in object:
         ob.draw()
-    for ra in rader:
+    for ra in radar:
         ra.draw()
     laser.draw()
     update_canvas()
